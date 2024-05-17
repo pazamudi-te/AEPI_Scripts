@@ -35,8 +35,7 @@ def get_agents_data():
 
 # Get the agents data
 agents_data = get_agents_data()
-
-print("Agents data:", agents_data)
+#print("Agents data:", agents_data)
 
 if agents_data:
     # List to hold the IDs of agents with lastSeen before the cutoff date
