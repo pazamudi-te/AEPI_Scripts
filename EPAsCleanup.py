@@ -3,9 +3,9 @@ from datetime import datetime
 
 # Define the base URL and parameters
 base_url = "https://api.thousandeyes.com"
-aid_te = "1431966"
+aid_te = "your_accountgroupid"
 endpoint = f"{base_url}/v7/endpoint/agents?aid={aid_te}"
-access_token = "46e5a018-5fd6-4ac5-9e6f-818cd8616c2d"
+access_token = "your_authentication_token"
 
 # Headers for OAuth authentication
 headers = {
