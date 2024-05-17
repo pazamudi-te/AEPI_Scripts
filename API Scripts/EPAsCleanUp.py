@@ -1,9 +1,14 @@
+# After reinstalling EPAs, there are hundreds of duplicated EPAs.
+# This script interacts with the ThousandEyes API to filter and delete endpoint agents based on their last connection date. 
+# It first retrieves a list of endpoint agents, filters out agents that have a last connection date prior to a specified cutoff date. 
+# It saves the IDs of these filtered agents in a list and then proceeds to delete each agent.
+
 import requests
 from datetime import datetime
 
 # Define the base URL and parameters
 base_url = "https://api.thousandeyes.com"
-aid_te = "your_accountgroupid"
+aid_te = "account_group_id"
 endpoint = f"{base_url}/v7/endpoint/agents?aid={aid_te}"
 access_token = "your_authentication_token"
 
@@ -14,7 +19,7 @@ headers = {
 }
 
 # Date to filter by
-cutoff_date = datetime(2024, 5, 17).date()
+cutoff_date = datetime(2024, 5, 17).date() # Change this date to the desired one
 
 # Function to get the agents data from the API
 def get_agents_data():
@@ -40,7 +45,7 @@ if agents_data:
     # Filter the agents
     for agent in agents_data['agents']:
         last_seen = datetime.fromisoformat(agent['lastSeen'][:-1]).date()  # Remove the 'Z' and parse the date
-        if last_seen == cutoff_date:
+        if last_seen < cutoff_date:
             filtered_agent_ids.append(agent['id'])
 
     # Print the filtered list of agent IDs
